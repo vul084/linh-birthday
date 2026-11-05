@@ -1,0 +1,285 @@
+:root{
+  --paper:#f7f4ee;
+  --paper-2:#f3efe6;
+  --brown:#472c22;
+  --brown-soft:#6a4b3d;
+  --line:rgba(71,44,34,.22);
+  --blue:#bad9f2;
+  --blue-deep:#8bb9dc;
+  --silver:#cbc8c1;
+  --red:#c04f49;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--paper);color:var(--brown)}
+body{font-family:Helvetica,sans-serif;-webkit-font-smoothing:antialiased;position:relative}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.05' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
+img{max-width:100%;display:block}
+button,a{-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer}
+main{min-height:100svh}
+.screen{min-height:100svh;padding:20px clamp(18px,4.4vw,88px) 40px;display:flex;flex-direction:column;position:relative}
+.top-rule{height:1px;background:var(--line);width:100%;margin-bottom:16px;flex:0 0 auto}
+.meta-button{border:0;background:none;padding:0;color:var(--brown);text-transform:lowercase;font:700 12px/1 Helvetica,sans-serif;letter-spacing:.01em;border-bottom:1px solid var(--brown)}
+
+/* dial page */
+.dial-meta{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:14px}
+.dial-meta p{margin:0;font-size:12px;letter-spacing:.02em;text-transform:lowercase}
+.dial-layout{flex:1;display:grid;grid-template-columns:minmax(220px,300px) minmax(320px,1fr) 170px;align-items:center;gap:22px;max-width:1200px;width:100%;margin:0 auto}
+.dial-copy{align-self:center;max-width:245px}
+.kicker{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--brown-soft);margin-bottom:16px}
+.dial-copy h1{margin:0 0 14px;font:800 clamp(26px,3.6vw,44px)/.98 Georgia,serif;letter-spacing:-.06em}
+.dial-copy p{margin:0;font-size:14px;line-height:1.45;color:rgba(71,44,34,.82)}
+.dial-wrap{width:min(74vh,68vw,620px);aspect-ratio:1;justify-self:center;position:relative;filter:drop-shadow(0 18px 16px rgba(46,35,29,.15))}
+.dial-frame{position:absolute;inset:0;border-radius:50%;border:2px solid #595951;background:repeating-radial-gradient(circle at 49% 45%,transparent 0 3px,rgba(255,255,255,.14) 3.4px 4px,transparent 4.5px 8px),conic-gradient(from 12deg,#8a897f,#efeee5 8%,#909086 16%,#dbdbd1 30%,#8a8a7f 44%,#e3e2d8 57%,#818279 72%,#d7d5ca 87%,#8c8b82);box-shadow:inset 0 0 0 7px #dbdbd0,inset 0 0 0 10px #66665e,inset 0 0 0 15px #c6c6bb,inset 0 0 30px rgba(62,62,56,.45)}
+.dial-wheel{position:absolute;inset:3%;border-radius:50%;animation:wheel-rotate 18s linear infinite;will-change:transform}
+@keyframes wheel-rotate{to{transform:rotate(360deg)}}
+.number-ring{position:absolute;inset:0;border-radius:50%}
+.age-button{position:absolute;left:50%;top:50%;width:20%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:2px solid #5c5b53;background:linear-gradient(145deg,#74746c,#fbfbf4 22%,#9e9d93 42%,#efeee6 70%,#66665f);box-shadow:0 2px 6px rgba(35,29,26,.35), inset 0 0 0 3px #cfcec2, inset 0 0 0 5px #63625c;padding:6px;display:grid;place-items:center}
+.age-face{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 36% 26%,#fff,#edf7ff 46%,#bad9f2);box-shadow:inset 0 2px 6px rgba(55,48,44,.28);font:800 clamp(18px,3vw,34px)/1 Georgia,serif;color:var(--brown);letter-spacing:-.07em;transform:rotate(var(--counter-angle));transition:background .2s,color .2s}
+.age-button:focus-visible{outline:3px solid var(--brown);outline-offset:4px}
+.age-button.wrong .age-face{animation:wrongFlash .68s ease;background:var(--red);color:white}
+.age-button.correct .age-face{background:var(--blue)}
+@keyframes wrongFlash{0%,100%{transform:rotate(var(--counter-angle)) scale(1)}50%{transform:rotate(var(--counter-angle)) scale(.84)}}
+.dial-center{position:absolute;inset:27%;border-radius:50%;border:3px solid #6b6a62;background:radial-gradient(circle at 35% 25%,#fffef9 0,#f3f2ea 55%,#d7d5cb 100%);box-shadow:0 0 0 5px #e0dfd3,0 0 0 9px #74746b,inset 0 0 22px rgba(171,168,155,.65);display:grid;place-items:center;text-align:center;padding:8px;z-index:2}
+.dial-center-inner{width:100%}
+.ringing,.feedback{display:block;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.feedback{min-height:1.4em;margin-top:12px}
+.center-question{font:800 clamp(14px,2.3vw,27px)/1.08 Georgia,serif;letter-spacing:-.05em;text-transform:lowercase;margin-top:10px}
+.finger-stop{position:absolute;right:10%;bottom:6%;width:8%;height:27%;border-radius:36px 36px 18px 18px;transform:rotate(-41deg);transform-origin:50% 80%;border:2px solid #5f6058;background:linear-gradient(90deg,#5d5e56 0%,#ddd 20%,#fbfbf4 48%,#a5a69b 74%,#5d5e57 100%);box-shadow:3px 4px 4px rgba(31,28,26,.38);pointer-events:none;z-index:3}
+.dial-object-note{justify-self:end;display:flex;flex-direction:column;align-items:center;gap:8px;transform:rotate(8deg)}
+.dial-object-note img{width:130px;filter:drop-shadow(0 10px 9px rgba(53,43,36,.12))}
+.dial-object-note span{font-size:12px;font-weight:700;letter-spacing:.06em}
+
+/* invite page */
+.invite-shell{flex:1;display:flex;flex-direction:column;max-width:1180px;width:100%;margin:0 auto}
+.invite-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:18px}
+.left-meta{display:grid;gap:5px;font-size:12px;text-transform:lowercase;letter-spacing:.02em}
+.editorial-field{position:relative;flex:1;padding:10px 0 18px;min-height:460px}
+.floating-meta{position:absolute;font-size:12px;text-transform:lowercase;letter-spacing:.01em;color:rgba(71,44,34,.78)}
+.meta-a{left:2%;top:5%}
+.meta-b{right:2%;top:5%;font:800 20px/1 Georgia,serif;letter-spacing:-.04em;transform:rotate(-8deg)}
+.meta-c{left:7%;bottom:7%}
+.moodboard{position:relative;height:100%;min-height:380px;display:flex;align-items:center;justify-content:center}
+.card{position:absolute;background:rgba(255,255,255,.55);box-shadow:0 10px 30px rgba(52,40,33,.08)}
+.cake-card{left:9%;top:22%;width:min(250px,23vw);background:none;box-shadow:none}
+.cake-panel{background:#4d3126;border-radius:2px;padding:28px 18px;display:flex;align-items:center;justify-content:center}
+.cake-panel img{width:100%;max-width:180px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.photo-card{overflow:hidden}
+.photo-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.97) contrast(1.01)}
+.beach-card{left:28%;top:18%;width:min(275px,25vw);aspect-ratio:3/4;transform:rotate(-4deg)}
+.princess-card{left:55%;top:21%;width:min(290px,25vw);aspect-ratio:3/4;transform:rotate(3deg)}
+.face-sticker{position:absolute;right:17%;bottom:2%;width:min(110px,10vw);filter:drop-shadow(0 7px 9px rgba(40,30,24,.14))}
+.invite-grid{display:grid;grid-template-columns:minmax(260px,1.1fr) minmax(260px,.9fr);gap:40px;border-top:1px solid var(--line);padding-top:22px;align-items:start}
+.section-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--brown-soft);margin-bottom:9px}
+.message-block p{margin:0;max-width:510px;font-size:15px;line-height:1.55}
+.details-block{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.details-block strong{display:block;font-size:15px;line-height:1.45;font-weight:700}
+.rsvp-link{grid-column:1/-1;justify-self:start;margin-top:2px;text-decoration:none;color:white;background:var(--brown);padding:12px 18px;font-size:12px;font-weight:700;letter-spacing:.01em}
+.rsvp-link:hover{background:#654536}
+
+.zoom-overlay{position:fixed;left:0;top:0;width:1px;height:1px;background:var(--paper);border-radius:50%;pointer-events:none;opacity:0;z-index:30;transform:translate(-50%,-50%) scale(1);transition:transform .82s cubic-bezier(.7,0,.2,1),opacity .15s}
+.zoom-overlay.active{opacity:1;transform:translate(-50%,-50%) scale(var(--zoom-scale,60))}
+
+@media (max-width: 950px){
+  .dial-layout{grid-template-columns:1fr;justify-items:center;text-align:center;padding:8px 0 12px}
+  .dial-copy{max-width:450px}
+  .dial-wrap{width:min(92vw,560px)}
+  .dial-object-note{display:none}
+  .invite-head{margin-bottom:8px}
+  .editorial-field{min-height:560px}
+  .cake-card{left:0;top:20%;width:min(200px,28vw)}
+  .beach-card{left:20%;top:19%;width:min(250px,37vw)}
+  .princess-card{left:52%;top:26%;width:min(250px,34vw)}
+  .face-sticker{right:8%;bottom:9%;width:96px}
+  .invite-grid{grid-template-columns:1fr;gap:24px}
+}
+@media (max-width: 700px){
+  .screen{padding:16px 16px 28px}
+  .dial-meta p,.left-meta,.floating-meta{font-size:11px}
+  .meta-button{font-size:11px}
+  .dial-copy h1{font-size:32px}
+  .dial-copy p{font-size:13px}
+  .dial-wrap{width:min(96vw,460px)}
+  .center-question{font-size:clamp(13px,3.7vw,20px)}
+  .ringing,.feedback{font-size:8px}
+  .editorial-field{min-height:660px;padding-top:12px}
+  .moodboard{display:block;min-height:540px}
+  .cake-card{left:4%;top:20px;width:34vw;min-width:118px}
+  .beach-card{left:22%;top:82px;width:46vw;min-width:185px}
+  .princess-card{left:48%;top:230px;width:42vw;min-width:165px}
+  .face-sticker{right:4%;bottom:30px;width:82px}
+  .meta-a{left:3%;top:0}
+  .meta-b{right:4%;top:0;font-size:18px}
+  .meta-c{left:3%;bottom:0}
+  .details-block{grid-template-columns:1fr}
+  .details-block strong,.message-block p{font-size:14px}
+}
+@media (prefers-reduced-motion: reduce){
+  .dial-wheel{animation:none!important}
+  *,:before,:after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+[hidden]{display:none!important}
+
+/* V5 — restrained, film-grain editorial letter */
+:root{--paper:#f6f3ec;--brown:#422c24;--blue:#c2dbea}
+.dial-copy p{font:400 14px/1.5 Helvetica,sans-serif;letter-spacing:0;max-width:220px}
+.dial-object-note span{display:none}
+.dial-object-note img{width:clamp(110px,14vw,190px);filter:drop-shadow(1px 7px 7px #3d332724)}
+.invite-screen{background:#f6f3ec;overflow-x:hidden;padding-bottom:42px}
+.letter-shell{width:min(1120px,100%);margin:0 auto;position:relative;flex:1;min-height:700px}
+.letter-topline{display:flex;justify-content:space-between;align-items:center;margin:8px 0 28px;font:500 11px Helvetica,sans-serif;letter-spacing:.07em}
+.archive-strip{height:245px;position:relative;width:min(850px,100%);margin:0 auto;display:flex;align-items:flex-start;justify-content:center;isolation:isolate}
+.archive-image{position:absolute;margin:0;background:#dfd9cd;padding:7px 7px 20px;box-shadow:0 3px 12px #3e352b24;overflow:hidden}
+.archive-image img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(1.075) contrast(.91) saturate(.86)}
+.archive-one{left:7%;top:25px;width:30%;height:212px;transform:rotate(-4deg);z-index:1}
+.archive-two{left:36%;top:0;width:32%;height:248px;transform:rotate(1deg);z-index:3}
+.archive-three{right:4%;top:32px;width:29%;height:206px;transform:rotate(5deg);z-index:2}
+.letter{width:min(680px,94%);margin:43px auto 0;position:relative;z-index:1;font-family:Helvetica,sans-serif;color:var(--brown)}
+.letter-greeting{font-size:clamp(19px,2vw,25px);font-weight:700;letter-spacing:-.04em;margin:0 0 20px}
+.letter-body{font-size:clamp(16px,1.55vw,19px);font-weight:400;line-height:1.68;letter-spacing:-.025em;min-height:215px;margin:0;white-space:pre-wrap}
+.letter-body::after{content:"";border-right:1px solid var(--brown);margin-left:2px;animation:cursor-blink .8s steps(1) infinite}
+.letter-body.finished::after{display:none}
+@keyframes cursor-blink{50%{opacity:0}}
+.letter-signoff{margin:24px 0 27px;font-size:15px;line-height:1.8}
+.letter-signoff span{display:block;font:700 24px/1.15 Georgia,serif;letter-spacing:-.05em;margin-top:4px}
+.letter .rsvp-link{display:inline-block;letter-spacing:.08em;padding:14px 21px}
+.paper-note{position:absolute;right:5%;bottom:42px;color:var(--brown);font:400 10px/1.65 Helvetica,sans-serif;letter-spacing:.045em;text-align:right;transform:rotate(-4deg)}
+@media(max-width:700px){
+ .letter-shell{min-height:730px}
+ .letter-topline{margin-bottom:24px}
+ .archive-strip{height:193px;width:100%}
+ .archive-one{left:0;top:24px;width:37%;height:153px}
+ .archive-two{left:32%;top:0;width:38%;height:192px}
+ .archive-three{right:0;top:29px;width:34%;height:150px}
+ .archive-image{padding:4px 4px 12px}
+ .letter{width:100%;margin-top:36px}
+ .letter-greeting{font-size:21px;margin-bottom:15px}
+ .letter-body{font-size:16px;line-height:1.58;min-height:340px}
+ .paper-note{position:static;text-align:right;margin-top:25px}
+}
+@media(prefers-reduced-motion:reduce){.letter-body::after{animation:none}}
+
+.paper-note{max-width:min(350px,85vw);line-height:1.6;text-align:right;font-size:11px;transform:rotate(-2deg)}
+.paper-note strong{font-weight:700}
+@media(max-width:700px){.paper-note{position:static;align-self:flex-end;margin:22px 0 4px;max-width:100%;font-size:10px}}
+
+/* V7: archival rotary dial / warm-paper first screen */
+:root{--paper:#f8f6e9;--paper-2:#f8f6e9;--blue:#d0dff0;--brown:#3d312c}
+html,body{background:var(--paper)}
+.dial-screen{min-height:100svh;min-height:100dvh;display:grid;place-items:center;padding:clamp(20px,4vw,48px);overflow:hidden;background:#f8f6e9}
+.dial-screen .dial-layout{display:flex;align-items:center;justify-content:center;max-width:none;width:100%;margin:0;padding:0;min-height:0;flex:initial}
+.dial-screen .dial-wrap{width:min(72vmin,640px);max-width:calc(100vw - 48px);aspect-ratio:1;justify-self:auto;filter:drop-shadow(0px 13px 15px #473d2a19)}
+.dial-screen .top-rule{display:none}
+.dial-screen .dial-sound{position:absolute;bottom:22px;right:clamp(20px,4vw,45px);z-index:6;border:0;font:400 11px/1.2 Helvetica,sans-serif;letter-spacing:.03em;text-transform:lowercase;color:#62594d;opacity:.85}
+.dial-screen .dial-frame{border-color:#65635b;background:repeating-radial-gradient(circle,transparent 0 6px,#ffffff1d 6.3px 7px,transparent 7.4px 12px),conic-gradient(from 22deg,#a3a198,#dedcd1 8%,#99978f 17%,#d5d1c7 27%,#9e9a90 40%,#e5e1d5 51%,#98988d 63%,#d8d5ca 77%,#a19f95 91%,#a3a198);box-shadow:inset 0 0 0 5px #d7d4c9,inset 0 0 0 8px #79776f,inset 0 0 0 12px #d0cec5,inset 0 0 22px #44433844}
+.dial-screen .age-button{border:1.5px solid #626059;background:linear-gradient(125deg,#737268,#edeae2 28%,#9c9a8f 55%,#e9e5db 80%,#6b6a61);box-shadow:0 1px 3px #3a382d77,inset 0 0 0 2px #d6d2c7,inset 0 0 0 4px #6e6b62;padding:5px}
+.dial-screen .age-face{font-family:Helvetica,sans-serif;font-weight:700;letter-spacing:-.055em;background:radial-gradient(circle at 35% 23%,#fffdf2 0%,#f8f4e7 66%,#e8e4d9 100%);box-shadow:inset 0 2px 5px #61584e30;color:#3c312d}
+.dial-screen .age-button:nth-child(3n + 1) .age-face{background:radial-gradient(circle at 35% 23%,#e2ecf6 0%,#cbddee 65%,#b7cbdc 100%)}
+.dial-screen .dial-center{background:radial-gradient(circle at 35% 27%,#fffff4 1%,#f7f4e6 65%,#ddd8c6 100%);border:2px solid #747167;box-shadow:0 0 0 4px #ddd9cd,0 0 0 8px #7d796f,inset 0 0 18px #a5a08b4f;padding:6px}
+.dial-screen .ringing,.dial-screen .feedback{font:400 clamp(7px,1.1vmin,10px)/1.4 Helvetica,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#675f51}
+.dial-screen .center-question{font:italic 500 clamp(15px,2.75vmin,27px)/1.25 Georgia,serif;letter-spacing:-.035em;text-transform:none;margin:11px 0 9px}
+.dial-screen .feedback{margin:0}
+.dial-screen .finger-stop{height:26%;width:8%;right:10%;bottom:7%;border-color:#69665e;background:linear-gradient(90deg,#77766e,#bcbab0 18%,#f5f2e7 51%,#aba99f 77%,#66665e)}
+@media(max-width:700px){
+ .dial-screen{padding:12px;}
+ .dial-screen .dial-wrap{width:min(calc(100vw - 22px),480px);max-width:none}
+ .dial-screen .center-question{font-size:clamp(12px,4vw,20px);line-height:1.2;margin:5px 0}
+ .dial-screen .ringing,.dial-screen .feedback{font-size:clamp(6px,1.75vw,9px);letter-spacing:.03em}
+ .dial-screen .age-button{padding:3px}
+ .dial-screen .age-face{font-size:clamp(13px,5.5vw,26px)}
+ .dial-screen .dial-center{inset:28%;padding:2px}
+ .dial-screen .dial-sound{bottom:max(20px,env(safe-area-inset-bottom));right:20px}
+}
+@media(max-width:390px){.dial-screen .center-question{font-size:12px}.dial-screen .age-face{font-size:17px}}
+
+/* V8 — strictly two typefaces across both screens: Georgia + Helvetica. */
+body,button,a,.meta-button,.letter-topline,.paper-note,.rsvp-link,.dial-sound,.ringing,.feedback,.age-face,.section-label{font-family:Helvetica,sans-serif}
+.dial-screen .center-question,.letter-greeting,.letter-body,.letter-signoff,.letter-signoff span{font-family:Georgia,serif}
+.letter-greeting{font-weight:700;letter-spacing:-.025em}
+.letter-body{font-weight:400;letter-spacing:-.012em;line-height:1.6}
+.letter-signoff span{font-style:italic;font-weight:700;letter-spacing:-.025em}
+@media(max-width:700px){.letter-body{font-size:16px;line-height:1.6}}
+
+
+/* V9 typography refresh */
+:root{
+  --font-display: "Archivo", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+body{font-family:var(--font-mono)!important;}
+.meta-button, .dial-meta p, .kicker, .ringing, .feedback, .left-meta, .floating-meta, .section-label, .paper-note, .details-block strong, .message-block p, .letter-greeting, .letter-body, .letter-signoff, .rsvp-link, .letter-topline, .dial-sound{
+  font-family:var(--font-mono)!important;
+}
+.center-question, .dial-copy h1, .age-face, .meta-b{
+  font-family:var(--font-display)!important;
+}
+.center-question{
+  font-weight:800!important;
+  letter-spacing:-.06em!important;
+  text-transform:none!important;
+}
+.age-face{
+  font-weight:800!important;
+  letter-spacing:-.05em!important;
+}
+.ringing,.feedback,.kicker,.section-label,.left-meta,.floating-meta,.paper-note,.letter-topline,.meta-button,.dial-meta p{
+  letter-spacing:.04em!important;
+}
+.letter-greeting,.letter-body,.letter-signoff,.message-block p,.details-block strong{
+  letter-spacing:0!important;
+}
+.letter-greeting{font-size:14px!important;}
+.letter-body{font-size:15px!important; line-height:1.8!important;}
+.letter-signoff{font-size:14px!important;}
+.rsvp-link{font-size:12px!important; font-weight:500!important;}
+.paper-note{font-size:12px!important; line-height:1.6!important;}
+@media (max-width:700px){
+  .letter-body{font-size:14px!important; line-height:1.75!important;}
+  .center-question{font-size:clamp(16px,5.2vw,26px)!important;}
+  .age-face{font-size:clamp(20px,6vw,31px)!important;}
+}
+
+
+/* V10: Helvetica headline and controls; IBM Plex Mono for the birthday letter. */
+:root{--font-display:Helvetica,Arial,sans-serif;--font-mono:"IBM Plex Mono",monospace}
+.dial-screen .center-question{
+  font-family:Helvetica,Arial,sans-serif!important;
+  font-style:normal!important;
+  font-weight:700!important;
+  letter-spacing:-.045em!important;
+  line-height:1.14!important;
+}
+.dial-screen .age-face{font-family:Helvetica,Arial,sans-serif!important;font-style:normal!important;font-weight:700!important}
+.letter .rsvp-link,.rsvp-link{
+  font-family:Helvetica,Arial,sans-serif!important;
+  font-size:12px!important;
+  font-style:normal!important;
+  font-weight:500!important;
+  letter-spacing:.035em!important;
+  text-transform:none;
+}
+.letter-topline,.letter-topline span,.letter-topline .meta-button,
+.letter-topline button{
+  font-family:Helvetica,Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:400!important;
+  font-style:normal!important;
+  letter-spacing:.015em!important;
+}
+.letter-topline .meta-button{text-decoration:none}
+@media(max-width:700px){
+  .dial-screen .center-question{font-size:clamp(14px,4.35vw,22px)!important}
+  .letter-topline,.letter-topline span,.letter-topline button{font-size:10px!important}
+}
+
+/* V11: Signature uses the same IBM Plex Mono as the letter. */
+.letter-signoff span{font-family:"IBM Plex Mono",monospace!important;font-style:normal!important;font-weight:500!important;font-size:20px!important;letter-spacing:-.035em!important;line-height:1.35!important;}
+@media(max-width:700px){.letter-signoff span{font-size:18px!important;}}
+
+/* V12: slightly larger type inside the rotary dial. */
+.dial-screen .center-question{font-size:clamp(18px,2.65vw,31px)!important;}
+.dial-screen .ringing,.dial-screen .feedback{font-size:11px!important;}
+@media(max-width:700px){
+ .dial-screen .center-question{font-size:clamp(16px,4.85vw,24px)!important;}
+ .dial-screen .ringing,.dial-screen .feedback{font-size:9px!important;}
+}

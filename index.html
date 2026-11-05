@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ee">
+  <meta name="description" content="A birthday invitation from Linh.">
+  <title>From Linh, to you</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<main>
+  <section id="dialPage" class="screen dial-screen" aria-label="Guess Linh's age">
+    <button id="soundToggle" class="meta-button dial-sound" aria-pressed="true">sound on ♪</button>
+
+    <div class="dial-layout">
+      <div class="dial-wrap">
+        <div class="dial-frame">
+          <div class="dial-wheel" id="dialWheel">
+            <div id="numberRing" class="number-ring" aria-label="choose an age"></div>
+          </div>
+          <div class="dial-center">
+            <div class="dial-center-inner">
+              <span class="ringing">incoming call</span>
+              <h1 class="center-question">How old is<br>Linh turning<br>this year?</h1>
+              <span id="feedback" class="feedback" aria-live="polite">choose a number</span>
+            </div>
+          </div>
+          <div class="finger-stop" aria-hidden="true"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="invitePage" class="screen invite-screen" aria-label="Birthday invitation" hidden aria-hidden="true">
+    <div class="top-rule"></div>
+    <div class="letter-shell">
+      <div class="letter-topline"><span>A NOTE FROM LINH</span><button id="replay" class="meta-button">call again ↶</button></div>
+      <div class="archive-strip" aria-label="Childhood photo archive">
+        <figure class="archive-image archive-one"><img src="assets/archive-1.jpg" alt="Childhood photograph of Linh at the beach"></figure>
+        <figure class="archive-image archive-two"><img src="assets/archive-2.jpg" alt="Childhood photograph of Linh in a purple dress"></figure>
+        <figure class="archive-image archive-three"><img src="assets/archive-3.jpg" alt="Childhood photograph of Linh dressed up for a dance performance"></figure>
+      </div>
+      <article class="letter" aria-label="Personal birthday invitation">
+        <p class="letter-greeting">Annyeonghaseyo,</p>
+        <p class="letter-body" id="typedMessage" aria-label="Congrats on guessing my age right! As a reward, you&#x27;re officially invited to my birthday party.&#10;&#10;We&#x27;ll be eating good, drinking good, and hopefully making some questionable memories together. My actual birthday is November 16, but since we have school that day (unfortunately), we&#x27;re celebrating a little early.&#10;&#10;Food&#x27;s on me, so just bring yourself (and maybe a gift because I&#x27;m materialistic like that).&#10;&#10;See you on Saturday, November 14, at 7:30 PM at Crystine&#x27;s house. Can&#x27;t wait to celebrate with you!"></p>
+        <p class="letter-signoff">With love,<span>Linh Vu ♡</span></p>
+        <a id="rsvpLink" class="rsvp-link" href="#">DM ME ON INSTAGRAM ↗</a>
+      </article>
+      <div class="paper-note">SATURDAY, NOVEMBER 14 · 7:30 PM<br><strong>PRISM AT PARK AVENUE SOUTH APARTMENTS</strong><br>50 E 28th St, New York, NY 10016</div>
+    </div>
+  </section>
+  <div class="zoom-overlay" id="zoomOverlay" aria-hidden="true"></div>
+</main>
+</body>
+</html>
